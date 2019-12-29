@@ -5,6 +5,7 @@ import datetime
 
 class Smjer(models.Model):
     naziv_smjera=models.CharField(max_length=60)
+    
     class Meta:
         verbose_name_plural='Smjerovi'
 
@@ -24,7 +25,7 @@ class Skola(models.Model):
         verbose_name_plural='Skole'
     
     def __str_():
-        return f"{self.ime_skole}"
+        return self.ime_skole
 
 class Ucenik(models.Model): 
     ime=models.CharField(max_length=60)
@@ -52,7 +53,7 @@ class Priznanja(models.Model):
 
 class Predmet(models.Model):
     naziv_predmeta=models.CharField(max_length=60)
-    predmet_kljucni_smjer=models.ManyToMany(Smjer)
+    
     #Prosljeduje se ManyToMany veza u novu tabelu Predmet_Ocjene
     ocjene_ucenika=models.ManyToManyField(Ucenik, through='Predmet_Ocjena')
     class Meta:
@@ -66,3 +67,9 @@ class Predmet_Ocjena(models.Model):
     predmet=models.ForeignKey(Predmet, on_delete=models.CASCADE)
     ocjena=models.IntegerField(default='0')
     razred=models.IntegerField(default='6')
+
+class Kljucni_Predmeti(models.Model):
+    naziv_predmeta=models.CharField(max_length=40)
+    smjer_id=models.ManyToManyField(Smjer)
+    
+
