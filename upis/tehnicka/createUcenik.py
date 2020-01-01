@@ -12,6 +12,8 @@ def getStudent(request):
 
     context={
     'smjerovi': Smjer.objects.all(),
+    'skole':Skola.objects.all(),
+    'predmeti':Predmet.objects.all()
     
     }
     if not request.user.is_authenticated:
@@ -23,7 +25,7 @@ def getStudent(request):
 def saveStudent(request):
     ime=request.POST['ime']
     prezime=request.POST['prezime']
-    osnovna_skola=request.POST['skola']
+    osnovna_skola=request.POST['osnovna_skola']
     skola=Skola.objects.get(pk=osnovna_skola)
     smjer_id=request.POST['smjer']
     smjer=Smjer.objects.get(pk=smjer_id)
@@ -34,34 +36,53 @@ def saveStudent(request):
     predmet1_razred6_ocjena=request.POST.getlist('razred9')
     priznanja_naziv=request.POST.getlist('priznanje_naziv')
     priznanje_bodovi=request.POST.getlist('priznanje_bodovi')
-
+    
     #Isto i sa i bez ovoga 
-    transaction.set_autocommit(False)
+    
     try:
         
-        ucenik=Ucenik(ime=ime,prezime=prezime,smjer=smjer,skola_id=skola)
+        ucenik=Ucenik(ime=ime,prezime=prezime,smjer_id=smjer,skola_id=skola)
         ucenik.save()
-        i=6
-        j=1
-        #Prva while petlja se koristi za prolazak kroz predmete 
-        #Druga za razred 
-        while j<3:
-            predmet=Predmet.objects.get(id=j)
-            while i<10:
-                predmet_ocjene1=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= predmet_razred6_ocjena,razred=i)
-                predmet_ocjene1.save()
-                predmet_ocjene2=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= predmet_razred7_ocjena,razred=i)
-                predmet_ocjene2.save()
-                predmet_ocjene3=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= predmet_razred8_ocjena,razred=i)
-                predmet_ocjene3.save()
-                predmet_ocjene4=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= predmet_razred9_ocjena,razred=i)
-                predmet_ocjene4.save()
-                i=i+1
-            j=j+1   
+        temp=0
+        #h je brojac za porlaz kroz listu gdje se nalaze ocjene za razred 6 
+        i=1
+        #Brojac koji se koristi da se prode kroz sve ocjene za predmete u 6 razredu
+        #Spremanje ocjena za sve predemete u 6 razredu 
+        #for predmet in predmeti:
+        for ocjena in predmet_razred6_ocjena:
+            predmet=Predmet.objects.get(pk=i)
+            if(predmet.naziv_predmeta =='Informatika'):
+                temp=temp+1
+            else:
+             predmet_ocjene1=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena=ocjena,razred=6)
+             predmet_ocjene1.save()
+            i=i+1
+
+        #Brojac za prolazak korz ocjene razreda 7 
+        #Upis ocjena za sedmi razredd za sve predmete
+        
+        #for predmet in predmeti:
+            #predmet_razred7_ocjena=predmet_razred6_ocjena[brojac]
+            #brojac=brojac+1
+            #Informatika, Fizika i hemija nemaju u 6 razredu 
+            #if(predmet.naziv_predmeta=='Informatika' or predmet.naziv_predmeta=='Fizika' or predmet.naziv_predmeta=='Hemija'):
+                #temp=temp+1
+            #else:
+                #predmet_ocjene1=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= predmet_razred7_ocjena,razred=7)
+                #predmet_ocjene1.save()
+        i=1
+        for ocjena in predmet_razred7_ocjena:
+           predmet1=Predmet.objects.get(pk=i)
+           if(predmet1.naziv_predmeta =='Informatika'):
+                temp=temp+1
+           else:
+             predmet_ocjene2=Predmet_Ocjena(ucenik=ucenik,predmet=predmet1,ocjena=ocjena,razred=7)
+             predmet_ocjene2.save()
+           i=i+1
+
+
+       
     except:
         transaction.rollback()
         raise
-    else:
-        transaction.commit()
-    finally:
-        transaction.set_autocommit(True)
+    
