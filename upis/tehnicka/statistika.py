@@ -53,7 +53,7 @@ def racunajStatistiku(request, smjer_id, message):
 
 
     #Dohvatanje ucenika, ucenici su sleektovani po smjeru koji su odabrali 
-    for ucenik in Ucenik.objects.filter(smjer_id=smjer):
+    for ucenik in Ucenik.objects.filter(smjer=smjer):
         #----------------SUME OCJENA I BROJACI PREDMETA ---------------------------#
         s=0
         brP=0
@@ -178,7 +178,7 @@ def racunajStatistiku(request, smjer_id, message):
             priznanje_opcinsko_dict[ucenik.id]+priznanje_kantonalno_dict[ucenik.id]+priznanje_federalno_dict[ucenik.id],2)
 
     context={
-    'ucenici':Ucenik.objects.filter(smjer_id=smjer),     # 'smjerovi':Smjer.objects.all(),
+    'ucenici':Ucenik.objects.filter(smjer=smjer),     # 'smjerovi':Smjer.objects.all(),
     'kljucni_predmeti':Kljucni_Predmeti.objects.filter(smjer=smjer),
     'prosjek_6':prosjek6_dict,
     'prosjek_7':prosjek7_dict,
