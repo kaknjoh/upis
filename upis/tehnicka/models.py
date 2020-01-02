@@ -23,9 +23,9 @@ class Skola(models.Model):
 
     class Meta:
         verbose_name_plural='Skole'
-    
-    def __str_():
+    def __str__(self):
         return self.ime_skole
+       
 
 class Ucenik(models.Model): 
     ime=models.CharField(max_length=60)
@@ -68,8 +68,17 @@ class Predmet_Ocjena(models.Model):
     ocjena=models.IntegerField(default='0')
     razred=models.IntegerField(default='6')
 
-class Kljucni_Predmeti(models.Model):
-    naziv_predmeta=models.CharField(max_length=40)
-    smjer_id=models.ManyToManyField(Smjer)
-    
+    class Meta:
+        verbose_name_plural = "Ocjene iz predmeta"
 
+    def __str__(self):
+        return f"{self.ucenik.ime}_{self.ucenik.prezime}_{self.predmet.naziv_predmeta}_{self.ocjena}_{self.razred}"
+
+class Kljucni_Predmeti(models.Model):
+    naziv_pr=models.CharField(max_length=40)
+    smjer=models.ManyToManyField(Smjer)
+
+class Razred(models.Model):
+    naziv_razreda=models.CharField(max_length=50)
+    broj_razreda=models.IntegerField(default='6')
+    predmet=models.ManyToManyField(Predmet)
