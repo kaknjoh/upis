@@ -35,39 +35,44 @@ def racunajStatistiku(request, smjer_id, message):
 
     posebni_predmeti_ukupno_dict={}
 
+
+
     ukupno_dict={}
+
+    #Priznanja
+    priznanje_opcinsko_dict={} 
+    priznanje_kantonalno_dict={}
+    priznanje_federalno_dict={}
   
 
     
 
 
     # Potrebno za dobivanje smjera koji je ucenik izabrao
-
     smjer=Smjer.objects.get(id=smjer_id)
-    #Dohvatanje ucenika, ucenici su sleektovani po smjeru koji su odabrali
-        #----------------SUME OCJENA I BROJACI PREDMETA ---------------------------#
-    s=0
-    brP=1
-    s1=0
-    brP1=1
-    s2=0
-    brP2=1
-    s3=0
-    brP3=1
 
-    posebni_predmet_1_razred8=0
-    posebni_predmet_1_razred9=0
-    posebni_predmet_2_razred8=0
-    posebni_predmet_2_razred9=0
-    posebni_predmet_3_razred6=0
-    posebni_predmet_3_razred7=0
 
-    
+    #Dohvatanje ucenika, ucenici su sleektovani po smjeru koji su odabrali 
     for ucenik in Ucenik.objects.filter(smjer_id=smjer):
-        
+        #----------------SUME OCJENA I BROJACI PREDMETA ---------------------------#
+        s=0
+        brP=0
+        s1=0
+        brP1=0
+        s2=0
+        brP2=0
+        s3=0
+        brP3=0
+
+        posebni_predmet_1_razred8=0
+        posebni_predmet_1_razred9=0
+        posebni_predmet_2_razred8=0
+        posebni_predmet_2_razred9=0
+        posebni_predmet_3_razred6=0
+        posebni_predmet_3_razred7=0
 
 
-        #For petlje za izracun sume ocjene za svaki razred
+        #For petlje za izracun sume ocjene za svaki razredi broja predmeta za svaki razred
         for razred in Predmet_Ocjena.objects.filter(ucenik=ucenik,razred=6):
             s=s+razred.ocjena
             brP=brP+1
@@ -85,10 +90,11 @@ def racunajStatistiku(request, smjer_id, message):
             brP3=brP3+1
 
 
-        
+        #Dohvatanje kljucnih predmeta po smjeru
         for predmet1 in Kljucni_Predmeti.objects.filter(smjer=smjer):
+            #Dohvatanje predmeta iz liste svih predmeta po njegovom nazivu
             predmet=Predmet.objects.get(naziv_predmeta=predmet1.naziv_pr)
-            if(predmet1.naziv_pr=='Matematika'):
+            if(predmet1.naziv_pr =='Matematika'):
                 ocjena=Predmet_Ocjena.objects.get(ucenik=ucenik,predmet=predmet,razred=9)
                 posebni_predmet_1_razred9=ocjena.ocjena
                 ocjena=Predmet_Ocjena.objects.get(ucenik=ucenik,predmet=predmet,razred=8)
@@ -143,12 +149,37 @@ def racunajStatistiku(request, smjer_id, message):
         posebni_predmeti_ukupno_dict[ucenik.id]=round(posebni_predmet_1_razred9+posebni_predmet_1_razred8+posebni_predmet_2_razred9+posebni_predmet_2_razred8+posebni_predmet_3_razred7+posebni_predmet_3_razred6,2)
 
 
-        ukupno_dict[ucenik.id]=round(posebni_predmeti_ukupno_dict[ucenik.id]+prosjek_ukupno_dict[ucenik.id],2)
+
+        #Priznanja
+        priznanja=Priznanja.objects.filter(ucenik_id=ucenik)
+        if not priznanja:
+           priznanje_opcinsko_dict[ucenik.id]=0
+           priznanje_kantonalno_dict[ucenik.id]=0
+           priznanje_federalno_dict[ucenik.id]=0
+        else:
+            suma_bodova_opcinsko=0
+            suma_bodova_kantonalno=0
+            suma_bodova_federalno=0
+            for priznanje in priznanja:
+                if (priznanje.naziv_priznanja == "Opcinsko takmicenje"):
+                    suma_bodova_opcinsko=suma_bodova_opcinsko+priznanje.bodovi
+                elif(priznanje.naziv_priznanja == "Kantonalno takmicenje"):
+                    suma_bodova_kantonalno=suma_bodova_kantonalno+priznanje.bodovi
+                elif(priznanje.naziv_priznanja=='Federalno takmicenje'):
+                    suma_bodova_federalno=suma_bodova_federalno+priznanje.bodovi
+
+            priznanje_opcinsko_dict[ucenik.id]=suma_bodova_opcinsko
+            priznanje_kantonalno_dict[ucenik.id]=suma_bodova_kantonalno
+            priznanje_federalno_dict[ucenik.id]=suma_bodova_federalno
+
+
+
+        ukupno_dict[ucenik.id]=round(posebni_predmeti_ukupno_dict[ucenik.id]+prosjek_ukupno_dict[ucenik.id]+\
+            priznanje_opcinsko_dict[ucenik.id]+priznanje_kantonalno_dict[ucenik.id]+priznanje_federalno_dict[ucenik.id],2)
 
     context={
     'ucenici':Ucenik.objects.filter(smjer_id=smjer),     # 'smjerovi':Smjer.objects.all(),
     'kljucni_predmeti':Kljucni_Predmeti.objects.filter(smjer=smjer),
-
     'prosjek_6':prosjek6_dict,
     'prosjek_7':prosjek7_dict,
     'prosjek_8':prosjek8_dict,
@@ -164,6 +195,9 @@ def racunajStatistiku(request, smjer_id, message):
     'posebni_predmet_3_ocjena_razred7':posebni_predmet_3_razred7_dict,
 
     'posebni_predmet_ukupno':posebni_predmeti_ukupno_dict,
+    'priznanje_opcinsko':priznanje_opcinsko_dict,
+    'priznanje_kantonalo': priznanje_kantonalno_dict,
+    'priznanje_federalno': priznanje_federalno_dict,
      
     'ukupno':ukupno_dict,
 
