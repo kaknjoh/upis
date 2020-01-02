@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import  Predmet,Ucenik,Predmet_Ocjena,Priznanja,Skola,Smjer
+from .models import  Predmet,Ucenik,Predmet_Ocjena,Priznanja,Skola,Smjer,Razred
 from django.db import transaction
 from django.urls import reverse
 
@@ -33,7 +33,7 @@ def saveStudent(request):
     predmet_razred6_ocjena=request.POST.getlist('razred6')
     predmet_razred7_ocjena=request.POST.getlist('razred7')
     predmet_razred8_ocjena=request.POST.getlist('razred8')
-    predmet1_razred6_ocjena=request.POST.getlist('razred9')
+    predmet_razred9_ocjena=request.POST.getlist('razred9')
     priznanja_naziv=request.POST.getlist('priznanje_naziv')
     priznanje_bodovi=request.POST.getlist('priznanje_bodovi')
     
@@ -43,20 +43,18 @@ def saveStudent(request):
         
         ucenik=Ucenik(ime=ime,prezime=prezime,smjer_id=smjer,skola_id=skola)
         ucenik.save()
-        temp=0
-        #h je brojac za porlaz kroz listu gdje se nalaze ocjene za razred 6 
-        i=1
+         
+        i=0
         #Brojac koji se koristi da se prode kroz sve ocjene za predmete u 6 razredu
         #Spremanje ocjena za sve predemete u 6 razredu 
         #for predmet in predmeti:
-        for ocjena in predmet_razred6_ocjena:
-            predmet=Predmet.objects.get(pk=i)
-            if(predmet.naziv_predmeta =='Informatika'):
-                temp=temp+1
-            else:
-             predmet_ocjene1=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena=ocjena,razred=6)
-             predmet_ocjene1.save()
+        predmeti6=Predmet.objects.filter(razred__broj_razreda=6)
+        for predmet in predmeti6:
+            ocjena=predmet_razred6_ocjena[i]
+            predmet_ocjene1=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= ocjena,razred=6)
+            predmet_ocjene1.save()
             i=i+1
+
 
         #Brojac za prolazak korz ocjene razreda 7 
         #Upis ocjena za sedmi razredd za sve predmete
@@ -70,18 +68,58 @@ def saveStudent(request):
             #else:
                 #predmet_ocjene1=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= predmet_razred7_ocjena,razred=7)
                 #predmet_ocjene1.save()
-        i=1
-        for ocjena in predmet_razred7_ocjena:
-           predmet1=Predmet.objects.get(pk=i)
-           if(predmet1.naziv_predmeta =='Informatika'):
-                temp=temp+1
-           else:
-             predmet_ocjene2=Predmet_Ocjena(ucenik=ucenik,predmet=predmet1,ocjena=ocjena,razred=7)
-             predmet_ocjene2.save()
-           i=i+1
+        #---------------------RAZRED 7------------------------------------------#
 
+        i=0
+        predmeti7=Predmet.objects.filter(razred__broj_razreda=7)
+        for predmet in predmeti7:
+            ocjena=predmet_razred7_ocjena[i]
+            predmet_ocjene2=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= ocjena,razred=7)
+            predmet_ocjene2.save()
+            i=i+1
 
-       
+        #Ne moze na ovaj nacin kakda ispretplicu predmeti iz razlicitih razreda ne upisuje dobro odnosno ide redom predmete i upise samo onoliko koliko ima ocjena
+        #for ocjena in predmet_razred7_ocjena:
+           #predmet1=Predmet.objects.get(pk=i)
+           #if(predmet1.naziv_predmeta =='Fizika'):
+                #temp=temp+1
+           #else:
+             #predmet_ocjene2=Predmet_Ocjena(ucenik=ucenik,predmet=predmet1,ocjena=ocjena,razred=7)
+             #predmet_ocjene2.save()
+           #i=i+1
+
+        #------------------------------RAZRED 8 ----------------------------------------#
+        i=0
+        predmeti8=Predmet.objects.filter(razred__broj_razreda=8)
+        for predmet in predmeti8:
+            ocjena=predmet_razred8_ocjena[i]
+            predmet_ocjene3=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= ocjena,razred=8)
+            predmet_ocjene3.save()
+            i=i+1
+
+       #------------------------------RAZRED 9 ---------------------------------------------#
+
+        i=0
+        predmeti9=Predmet.objects.filter(razred__broj_razreda=9)
+        for predmet in predmeti9:
+            ocjena=predmet_razred9_ocjena[i]
+            predmet_ocjene4=Predmet_Ocjena(ucenik=ucenik,predmet=predmet,ocjena= ocjena,razred=9)
+            predmet_ocjene4.save()
+            i=i+1
+           
+        #Priznanja
+
+        if priznanje_bodovi:
+            for i in range(len(priznanje_bodovi)):
+                naziv=priznanja_naziv[i]
+                bodovi=priznanje_bodovi[i]
+                priznanje=Priznanja(naziv_priznanja=naziv, bodovi=bodovi)
+                priznanje.save()
+                ucenik=Ucenik.objects.filter(id=ucenik.id)
+                priznanje.ucenik_id.set(ucenik)
+                priznanje.save()
+                
+
     except:
         transaction.rollback()
         raise
