@@ -31,7 +31,7 @@ class Ucenik(models.Model):
     ime=models.CharField(max_length=60)
     prezime=models.CharField(max_length=60)
     godina_upisa=models.IntegerField(default=current_year)
-    smjer_id=models.ForeignKey(Smjer, on_delete=models.CASCADE)
+    smjer=models.ManyToManyField(Smjer)
     skola_id=models.ForeignKey(Skola, on_delete=models.CASCADE )
 
     class Meta:
