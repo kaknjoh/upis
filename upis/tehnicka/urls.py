@@ -10,5 +10,6 @@ app_name = 'tehnicka'
 urlpatterns = [
     
     path("add-student/", views.dodajucenika, name='dodajucenika'),
+    path("smjer/<int:smjer_id>", views.index, name='index'),
    
 ]
