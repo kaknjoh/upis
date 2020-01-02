@@ -27,8 +27,13 @@ def saveStudent(request):
     prezime=request.POST['prezime']
     osnovna_skola=request.POST['osnovna_skola']
     skola=Skola.objects.get(pk=osnovna_skola)
-    smjer_id=request.POST['smjer']
-    smjer=Smjer.objects.get(pk=smjer_id)
+    smjer_izbor_1=request.POST['smjer1']
+    smjer_izbor_2=request.POST['smjer2']
+    smjer_izbor_3=request.POST['smjer3']
+
+    smjer1=Smjer.objects.get(pk=smjer_izbor_1)
+    smjer2=Smjer.objects.get(pk=smjer_izbor_2)
+    smjer3=Smjer.objects.get(pk=smjer_izbor_3)
 
     predmet_razred6_ocjena=request.POST.getlist('razred6')
     predmet_razred7_ocjena=request.POST.getlist('razred7')
@@ -41,8 +46,11 @@ def saveStudent(request):
     
     try:
         
-        ucenik=Ucenik(ime=ime,prezime=prezime,smjer_id=smjer,skola_id=skola)
+        ucenik=Ucenik(ime=ime,prezime=prezime,skola_id=skola)
         ucenik.save()
+        ucenik.smjer.add(smjer1)
+        ucenik.smjer.add(smjer2)
+        ucenik.smjer.add(smjer3)
          
         i=0
         #Brojac koji se koristi da se prode kroz sve ocjene za predmete u 6 razredu
