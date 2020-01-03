@@ -93,11 +93,11 @@ def updateStudent(request,ucenik_id):
           
         ucenik.osnovna_skola=osnovna_skola
         ucenik.save()
-        if priznanje_naziv:
+        if priznanja_naziv:
             ucenik_priznanja=Priznanja.objects.filter(ucenik_id=ucenik)
             if not ucenik_priznanja:#Ukoliko nema vec priznanja, ovdje se spremaju priznanja dodana na btn dodaj priznanja
                 for i in range(len(priznanje_bodovi)):
-                    naziv_priznanja=priznanje_naziv[i]
+                    naziv_priznanja=priznanja_naziv[i]
                     bodovi_priznanje=priznanje_bodovi[i]
                     priznanje=Priznanja(naziv_priznanja=naziv_priznanja,bodovi=bodovi_priznanje)
                     priznanje.save()
@@ -106,7 +106,7 @@ def updateStudent(request,ucenik_id):
             else: #Ukoliko vec ima updatamo samo postojeca
                  i=0
                  for priznanje in ucenik_priznanja:
-                        naziv=priznanje_naziv[i]
+                        naziv=priznanja_naziv[i]
                         bodovi=priznanje_bodovi[i]
                         priznanje.naziv=naziv
                         priznanje.bodovi=bodovi
