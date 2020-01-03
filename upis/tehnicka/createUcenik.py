@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import  Predmet,Ucenik,Predmet_Ocjena,Priznanja,Skola,Smjer,Razred
+from .models import  Predmet,Ucenik,Predmet_Ocjena,Priznanja,Skola,Smjer,Razred,Takmicenje
 from django.db import transaction
 from django.urls import reverse
 
@@ -13,7 +13,8 @@ def getStudent(request):
     context={
     'smjerovi': Smjer.objects.all(),
     'skole':Skola.objects.all(),
-    'predmeti':Predmet.objects.all()
+    'predmeti':Predmet.objects.all(),
+    'takmicenja':Takmicenje.objects.all()
     
     }
     if not request.user.is_authenticated:
