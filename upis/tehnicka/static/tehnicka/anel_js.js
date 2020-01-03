@@ -15,7 +15,13 @@ $('#priznanja_btn').click(function () {
         $('#table_priznanje tr:last').after('<tr id="brisi_red"> \
 		<td class="table-light"> <input type="text" min=2 max=5 name="priznanje_naziv" value=""> </td>\
 		<td class="table-light"> <input type="number" name="priznanje_bodovi" min="0" placeholder="0" value=""> </td>\
-		<td class="table-light"> <a href="#" id="brisi_priznanje" class="brisime"> <span> Izbrisi </span><i class="fa fa-trash"></i> </a> </td>\
+        //<td class="table-light">\
+        //<select class="" name="takmicenje">\
+            //"{% for smjer in smjerovi %}"\
+                //<option value="{{smjer.id}}"> "{{smjer.naziv_smjera}}"</option>\
+            //"{% endfor %}"\
+        //</select><\td>\
+		<td class="table-light"> <a href=""#"" id=""brisi_priznanje"" class=""brisime""> <span> Izbrisi </span><i class=""fa fa-trash""></i> </a> </td>\
 		</tr>');
 
         // @todo dodati vrstu takmicenja

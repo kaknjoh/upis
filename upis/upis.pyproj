@@ -33,9 +33,24 @@
     <Compile Include="manage.py" />
     <Compile Include="tehnicka\admin.py" />
     <Compile Include="tehnicka\apps.py" />
+    <Compile Include="tehnicka\createUcenik.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tehnicka\deleteUcenik.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tehnicka\migrations\__init__.py" />
     <Compile Include="tehnicka\models.py" />
+    <Compile Include="tehnicka\statistika.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tehnicka\tests.py" />
+    <Compile Include="tehnicka\updateUcenik.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tehnicka\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tehnicka\views.py" />
     <Compile Include="tehnicka\__init__.py" />
     <Compile Include="upis\__init__.py" />
@@ -45,11 +60,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
+    <Content Include="tehnicka\static\tehnicka\anel_js.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tehnicka\templates\tehnicka\base.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tehnicka\templates\tehnicka\details.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tehnicka\templates\tehnicka\dodajUcenika.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tehnicka\templates\tehnicka\index.html" />
+    <Content Include="tehnicka\templates\tehnicka\index_base.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="upis\logging.conf">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tehnicka\" />
     <Folder Include="tehnicka\migrations\" />
+    <Folder Include="tehnicka\static\" />
+    <Folder Include="tehnicka\static\tehnicka\" />
     <Folder Include="tehnicka\templates\" />
     <Folder Include="tehnicka\templates\tehnicka\" />
     <Folder Include="upis\" />

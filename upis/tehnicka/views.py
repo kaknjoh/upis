@@ -9,8 +9,12 @@ from .statistika import *
 from .updateUcenik import *
 from .deleteUcenik import *
 
-
-
+#------------------ INDEX BASE --------------------------#
+def index_base(request):
+    context={
+    'smjerovi': Smjer.objects.all()
+    }
+    return render(request, 'tehnicka/index_base.html',context)
 
 def index_viev_predmet(request):
     predmeti=Predmet.objects.all()
@@ -27,6 +31,7 @@ def index(request,smjer_id):
         message='Korisnik obrisan!'
         del request.session['message']
     return racunajStatistiku(request, smjer_id, message)
+#----------------------DODAJ UCENIKA -----------------------------------#
 
 def dodajucenika(request):
         if request.method == "POST":

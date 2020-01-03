@@ -8,7 +8,7 @@ from . import views
 
 app_name = 'tehnicka'
 urlpatterns = [
-    
+    path("",views.index_base,name="index_base"),
     path("add-student/", views.dodajucenika, name='dodajucenika'),
     path("smjer/<int:smjer_id>", views.index, name='index'),
     path("details/<int:ucenik_id>", views.details, name='details'),

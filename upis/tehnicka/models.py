@@ -40,9 +40,18 @@ class Ucenik(models.Model):
     def __str__(self):
         return  f"{self.ime} {self.prezime}" 
 
+class Takmicenje(models.Model):
+    vrsta_takmicenja=models.CharField(max_length=40)
+    class Meta:
+        verbose_name_plural = "Takmicenja"
+
+    def __str__(self):
+        return self.vrsta_takmicenja
+
 class Priznanja(models.Model):
     naziv_priznanja=models.CharField(max_length=40)
     bodovi=models.IntegerField(default='0')
+  
     ucenik_id=models.ManyToManyField(Ucenik)
     class Meta:
         verbose_name_plural = "Priznanja"
