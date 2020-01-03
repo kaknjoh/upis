@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 import json
 from .createUcenik import *
 from .statistika import *
+from .updateUcenik import *
+from .deleteUcenik import *
 
 
 
@@ -44,3 +46,21 @@ def dodajucenika(request):
         else: # GET request
            
             return getStudent(request)
+
+#------------ DETAILS UPDATE UCENIK -----------------------#
+def details(request, ucenik_id):
+    if request.method == "POST":
+        try:
+            return updateStudent(request, ucenik_id)
+        except KeyError:
+            return HttpResponse("Key error - post uredi")
+
+    else:
+        return get_for_update(request, ucenik_id)
+
+
+#----------- DELETE UCENIK -----------------------------#
+def delete(request, ucenik_id):
+
+    if request.user.is_authenticated:
+        return deleteStudent(request, ucenik_id)
