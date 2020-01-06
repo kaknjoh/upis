@@ -33,6 +33,7 @@ class Ucenik(models.Model):
     godina_upisa=models.IntegerField(default=current_year)
     smjer=models.ManyToManyField(Smjer)
     skola_id=models.ForeignKey(Skola, on_delete=models.CASCADE )
+    ukupno_bodova=models.FloatField(default='0')
 
     class Meta:
         verbose_name_plural = "Učenici"

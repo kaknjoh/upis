@@ -4,6 +4,8 @@
   Dodaj ucenika
 
 {% endblock %}
+ {% load static %}
+        <script type="text/javascript" src="{% static 'tehnicka/anel_js.js' %}"></script>
 
 {% block body %}
 <div class="container">
@@ -45,6 +47,7 @@
             </td>
            
           </tr>
+           <tr>Vjeronauka: <input type="checkbox" id="check" onclick="checkVjeronauka()" ></tr>
            <tr>
                <td>
                   <select class="" name="smjer1">
@@ -115,10 +118,21 @@
                                   <td> <input type="number" min=2 max=5 placeholder="ocjena"  name="razred9" value="" disabled></td>
 		                          <td class="table-light"> <a href="#" id="brisi_priznanje" class="brisipredmet"> <span> Izbrisi </span><i class="fa fa-trash"></i> </a> </td>
 		                       </tr>
+                    {% elif predmet.naziv_predmeta == "Vjeronauka" %}
+                              <div id="vjeronauka">
+                                 <tr >
+                                  <td><input type="text"  placeholder= "Ime predmeta" name="naziv" value="{{predmet.naziv_predmeta}}"></td>
+		                          <td> <input type="number" min=2 max=5 placeholder="ocjena" name="razred6" value=""></td>
+		                          <td><input type="number" min=2 max=5 placeholder="ocjena"  name="razred7" value=""></td>
+                                  <td> <input type="number" min=2 max=5 placeholder="ocjena" name="razred8" value="" disabled></td>
+                                  <td> <input type="number" min=2 max=5 placeholder="ocjena"  name="razred9" value="" disabled></td>
+		                          <td class="table-light"> <a href="#" id="brisi_priznanje" class="brisipredmet"> <span> Izbrisi </span><i class="fa fa-trash"></i> </a> </td>
+		                         </tr>
+                               </div>
                     {% else %}
 
                          
-                    
+                            
                              <tr>
                                   <td><input type="text"  placeholder= "Ime predmeta" name="naziv" value="{{predmet.naziv_predmeta}}"></td>
 		                          <td> <input type="number" min=2 max=5 placeholder="ocjena" name="razred6" value=""></td>

@@ -181,7 +181,7 @@
                   <td>{{ value }}</td>
                   {% endif %}
                 {% endfor%}
-                  <td></td>
+                  <td>
                 <!-- // SUMA I,II,III -->
                 {% for key, value in  ukupno.items %}
                   {% if key == ucenik.id %}
@@ -191,6 +191,7 @@
                 {% if request.user.is_authenticated %}
                   <td> <a href="{% url 'tehnicka:details' ucenik.id %} "> <span> Uredi </span><i class="fa fa-user"></i> </a> </td>
                   <td> <a href="{% url 'tehnicka:details' ucenik.id %} "> <span> Da </span><i class="fa fa-user-times"></i> </a> </td>
+                  
                 {% endif %}
                 <td>{{ ucenik.skola_id.ime_skole }}</td>
 
@@ -199,6 +200,7 @@
                
           </tbody>
         </table>
+         <button type="button" class="btn btn-outline-primary "><a href="{% url 'tehnicka:get_pdf' smjer.id %}"<span>Izradi PDF</span></a></button>
       </div>
 
     </div>

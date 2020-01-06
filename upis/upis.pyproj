@@ -41,6 +41,12 @@
     </Compile>
     <Compile Include="tehnicka\migrations\__init__.py" />
     <Compile Include="tehnicka\models.py" />
+    <Compile Include="tehnicka\pdf_statistika.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tehnicka\render.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tehnicka\statistika.py">
       <SubType>Code</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Content>
     <Content Include="tehnicka\templates\tehnicka\index.html" />
     <Content Include="tehnicka\templates\tehnicka\index_base.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tehnicka\templates\tehnicka\pdf.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="upis\logging.conf">
