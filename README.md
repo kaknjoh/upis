@@ -1,22 +1,21 @@
 # upis
 
-	sudo apt install python3-venv python3-pip
+
+
+
+Meni je ovako radilo. Nakon sto sam klonirao kreirao sam virtual enviroment: 
   
+  python3 -m venv env
   
-  python3 -m pip install --user --upgrade pip
-  
-  
-  python3 -m venv envir
-  
-   source env/bin/activate
+  source env/bin/activate - aktivirao je 
    
    
    U virutal env se instalira django 
    
    pip3 install django 
    
-  Pokretanjem trebalo bi da se pokrene django app 
-  django-admin manage.py runserver
+  Kada sam instalirao django nakon toga kad se navigiram u direktortij gdje se nalazi manage.py file kada pokrenem runama mi se program. 
+  python manage.py runserver-
   
   Nakon toga bi trebalo da se kreira superuser:
   
