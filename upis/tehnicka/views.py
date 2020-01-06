@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import  Predmet,Ucenik,Predmet_Ocjena,Priznanja,Smjer,Skola
 from django.contrib.auth import authenticate, login, logout
 from django.template.loader import get_template, render_to_string
-from fpdf import FPDF, HTMLMixin
+#from fpdf import FPDF, HTMLMixin
 
 import json
 from .createUcenik import *
