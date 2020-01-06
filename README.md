@@ -14,6 +14,9 @@ Meni je ovako radilo. Nakon sto sam klonirao kreirao sam virtual enviroment:
    
    pip3 install django 
    
+   Prije pokretanja potrebno je intstalirati biblioteku: 
+    pip install xhtml2pdf
+   
   Kada sam instalirao django nakon toga kad se navigiram u direktortij gdje se nalazi manage.py file kada pokrenem runama mi se program. 
   python manage.py runserver-
   
