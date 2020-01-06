@@ -176,9 +176,10 @@ def racunajStatistiku(request, smjer_id, message):
 
         ukupno_dict[ucenik.id]=round(posebni_predmeti_ukupno_dict[ucenik.id]+prosjek_ukupno_dict[ucenik.id]+\
             priznanje_opcinsko_dict[ucenik.id]+priznanje_kantonalno_dict[ucenik.id]+priznanje_federalno_dict[ucenik.id],2)
-
+        ucenik.ukupno_bodova=ukupno_dict[ucenik.id]
+        ucenik.save()
     context={
-    'ucenici':Ucenik.objects.filter(smjer=smjer),     # 'smjerovi':Smjer.objects.all(),
+    'ucenici':Ucenik.objects.filter(smjer=smjer).order_by('-ukupno_bodova'),     # 'smjerovi':Smjer.objects.all(),
     'kljucni_predmeti':Kljucni_Predmeti.objects.filter(smjer=smjer),
     'prosjek_6':prosjek6_dict,
     'prosjek_7':prosjek7_dict,
@@ -198,6 +199,7 @@ def racunajStatistiku(request, smjer_id, message):
     'priznanje_opcinsko':priznanje_opcinsko_dict,
     'priznanje_kantonalo': priznanje_kantonalno_dict,
     'priznanje_federalno': priznanje_federalno_dict,
+    'smjer':smjer,
      
     'ukupno':ukupno_dict,
 
