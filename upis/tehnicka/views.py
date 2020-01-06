@@ -2,12 +2,15 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import  Predmet,Ucenik,Predmet_Ocjena,Priznanja,Smjer,Skola
 from django.contrib.auth import authenticate, login, logout
+from django.template.loader import get_template, render_to_string
+from fpdf import FPDF, HTMLMixin
 
 import json
 from .createUcenik import *
 from .statistika import *
 from .updateUcenik import *
 from .deleteUcenik import *
+from .pdf_statistika import *
 
 #------------------ INDEX BASE --------------------------#
 def index_base(request):
@@ -69,3 +72,22 @@ def delete(request, ucenik_id):
 
     if request.user.is_authenticated:
         return deleteStudent(request, ucenik_id)
+
+
+
+#-------- RENDER TO PDF ---------------------#
+#class HtmlPdf(FPDF, HTMLMixin):
+    #pass
+
+
+#def print_pdf(request):    
+    #pdf = HtmlPdf()
+    #pdf.add_page()
+    #pdf.write_html(render_to_string('tehnicka/index.html'))
+
+    #response = HttpResponse(pdf.output(dest='S').encode('latin-1'))
+    #response['Content-Type'] = 'application/pdf'
+
+   # return response
+def get_pdf(request,smjer_id):
+       return pdf_racunajStatistiku(request,smjer_id)
