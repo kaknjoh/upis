@@ -1,6 +1,10 @@
 *.sln
 *.vs
+*env/
+*.pyproj
+*.pyproj.user
 
+!.gitignore
 ### Django ###
 *.log
 *.pot

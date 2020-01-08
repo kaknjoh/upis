@@ -11,6 +11,7 @@ from .statistika import *
 from .updateUcenik import *
 from .deleteUcenik import *
 from .pdf_statistika import *
+from .pretragaUcenika import *
 
 #------------------ INDEX BASE --------------------------#
 def index_base(request):
@@ -91,3 +92,10 @@ def delete(request, ucenik_id):
    # return response
 def get_pdf(request,smjer_id):
        return pdf_racunajStatistiku(request,smjer_id)
+
+
+#---------------------- PRETRAGA UCENIKA ------------------------------------#
+
+def pretraga(request,smjer_id):
+    if request.method=="POST":
+        return pretragaUcenika(request,smjer_id)
