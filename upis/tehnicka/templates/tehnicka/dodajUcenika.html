@@ -28,7 +28,7 @@
             <th  class="table-info" scope="col">Prezime</th>
             <!-- <th  class="table-info" scope="col">JMBG</th> -->
             <th  class="table-info" scope="col">Osnovna skola </th>
-            <th  class="table-info" scope="col">Smjer</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -48,7 +48,24 @@
            
           </tr>
            <tr>Vjeronauka: <input type="checkbox" id="check" onclick="checkVjeronauka()" ></tr>
-           <tr>
+           
+
+        </tbody>
+      </table>
+    </div>
+    <table class="table table-sm table-hover table-bordered">
+        <thead>
+          <tr>
+           
+            <th  class="table-info" scope="col">Smjer 1</th>
+            <th  class="table-info" scope="col">Smjer 2</th>
+            <!-- <th  class="table-info" scope="col">JMBG</th> -->
+            <th  class="table-info" scope="col">Smjer 3 </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
                <td>
                   <select class="" name="smjer1">
                     {% for smjer in smjerovi %}
@@ -71,11 +88,8 @@
                   </select>
                </td>     
            </tr>
-
         </tbody>
-      </table>
-    </div>
-
+    </table>
 
     <div class="table-responsive" id="div_add_student_grades">
       <table class="table table-sm table-hover table-bordered" id="tbl_add_student_grades">

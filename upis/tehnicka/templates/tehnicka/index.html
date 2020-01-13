@@ -213,7 +213,9 @@
                
           </tbody>
         </table>
+          {% if request.user.is_authenticated %}
          <button type="button" class="btn btn-outline-primary "><a href="{% url 'tehnicka:get_pdf' smjer.id %}"<span>Izradi PDF</span></a></button>
+          {% endif %}
       </div>
 
     </div>

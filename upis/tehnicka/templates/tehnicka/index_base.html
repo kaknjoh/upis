@@ -13,20 +13,20 @@
 {% block body %}
   <div class="container">
     {% for smjer in smjerovi%}
-    {% if smjer.id == 1 %}
-      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv}} </span><i class="fa fa-bolt"></i> </a>
+    {% if smjer.naziv_smjera == "Racunarska tehnika i automatika" %}
+      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv_smjera}} </span><i class="fa fa-bolt"></i> </a>
     {% endif %}
-    {% if smjer.id == 2 %}
-      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv}} </span><i class="fa fa-microchip"></i> </a>
+    {% if smjer.naziv_smjera == "Elektronicar" %}
+      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv_smjera}} </span><i class="fa fa-microchip"></i> </a>
     {% endif %}
-    {% if smjer.id == 3 %}
-      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv}} </span><i class="fa fa-building"></i> </a>
+    {% if smjer.naziv_smjera == "Masinski tehnicar" %}
+      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv_smjera}} </span><i class="fa fa-building"></i> </a>
     {% endif %}
-    {% if smjer.id == 4 %}
-      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv}} </span><i class="fa fa-industry"></i> </a>
+    {% if smjer.naziv_smjera == "Tehnicar drumskog saobracaja" %}
+      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv_smjera}} </span><i class="fa fa-industry"></i> </a>
     {% endif %}
-    {% if smjer.id == 5 %}
-      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv}} </span><i class="fa fa-flask"></i> </a>
+    {% if smjer.naziv_smjera == "Arhitektonski tehnicar" %}
+      <a href="{% url 'tehnicka:index' smjer.id %}"> <span> {{smjer.naziv_smjera}} </span><i class="fa fa-flask"></i> </a>
     {% endif %}
     <br>
     {% endfor %}
