@@ -1,4 +1,4 @@
-
+﻿
 
 <!doctype html>
 <html>
@@ -72,18 +72,71 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>I Opci kriterij</th>
-                <th> II Posebni kriterij</th>
-                <th>III Opci kriterij</th>
-                <th>Ukupno</th>
-                <th>Osnovna skola</th>
+                  <th  scope="col" rowspan="2">#</th>
+                  <th   scope="col" rowspan="3">Ime</th>
+                  <th   scope="col" rowspan="3">Prezime</th>
+                  <th   scope="col" rowspan="3" colspan="5" ><strong>I Opći kriterij </strong>
+                  <br> <em> Uspjeh VI-IX razreda o.š </em></th>
+                  <th   scope="col" rowspan="3" colspan="7" ><strong> II Posebni kriterij</strong>
+                  <br> <em> Relevantni nastavni predmeti </em></th>
+                  <th   scope="col" rowspan="3" colspan="3" ><strong>III Opći kriterij</strong>
+                  <br> <em> Uspjeh VI-IX razreda o.š</em></th>
+                  <th   scope="col" rowspan="3"colspan="1">Suma</th>
+                  {% if request.user.is_authenticated %}
+                    <th scope="col" rowspan="3"colspan="2"></th>
+                  {% endif %}
+                  <th  scope="col" rowspan="3">Osnovna skola</th>
             </tr>
             </thead>
             <tbody>
+            <tr>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1"></th>
+              <th scope="col" rowspan="1" colspan="2" >{{ posebni_predmet_1}}</th>
+              <th scope="col" rowspan="1" colspan="2">{{ posebni_predmet_2}}</th>
+              <th scope="col" rowspan="1" colspan="2">{{ posebni_predmet_3}}</th>
 
+              <th  scope="col" rowspan="2" colspan="1"> <center> Ukupno </center>  </th>
+              <th  scope="col" rowspan="1"></th>
+              <th  scope="col" rowspan="1"></th>
+              <th  scope="col" rowspan="1"></th>
+              <th " scope="col" rowspan="1"></th>
+              {% if request.user.is_authenticated %}
+                <th class="table-info" scope="col" rowspan="3"colspan="2"></th>
+              {% endif %}
+              <th class="table-info" scope="col" rowspan="1"></th>
+            </tr>
+
+
+             <tr>
+              <th  scope="col" rowspan="1"></th>
+              <th  scope="col" rowspan="1"></th>
+              <th  scope="col" rowspan="1"></th>
+              <th  scope="col" rowspan="1"> VI </th>
+              <th  scope="col" rowspan="1"> VII </th>
+              <th  scope="col" rowspan="1"> VIII </th>
+              <th  scope="col" rowspan="1"> IX </th>
+              <th  scope="col" rowspan="1"> <center> Ukupno </center> </th>
+
+              <th  scope="col" rowspan="1"> VIII </th>
+              <th  scope="col" rowspan="1"> IX </th>
+              <th  scope="col" rowspan="1"> VIII </th>
+              <th  scope="col" rowspan="1"> IX </th>
+              <th  scope="col" rowspan="1"> VI </th>
+              <th  scope="col" rowspan="1"> VII </th>
+
+              <th scope="col" rowspan="1">O</th>
+              <th  scope="col" rowspan="1">K</th>
+              <th  scope="col" rowspan="1">F</th>
+              <th  scope="col" rowspan="1"></th>
+              <th  scope="col" rowspan="1"></th>
+            </tr>
             {% for ucenik in ucenici|slice:":25" %}
                 <tr>
                     <td>{{forloop.counter}}</td>

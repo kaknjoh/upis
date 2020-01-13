@@ -19,7 +19,7 @@ def getStudent(request):
     }
     if not request.user.is_authenticated:
         return render(request, "users/login.html", {"message": None})
-    return render(request, 'tehnicka/dodajucenika.html', context)
+    return render(request, 'tehnicka/dodajUcenika.html', context)
 
 
 

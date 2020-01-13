@@ -102,7 +102,6 @@ def delete(request, ucenik_id):
    # return response
 def get_pdf(request,smjer_id):
        return pdf_racunajStatistiku(request,smjer_id)
-<<<<<<< HEAD
 
 
 #---------------------- PRETRAGA UCENIKA ------------------------------------#
@@ -110,5 +109,4 @@ def get_pdf(request,smjer_id):
 def pretraga(request,smjer_id):
     if request.method=="POST":
         return pretragaUcenika(request,smjer_id)
-=======
->>>>>>> 3befde1aa2056c32d081a6da73aeaa3e45a335e0
+

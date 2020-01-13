@@ -71,19 +71,51 @@ def dodajKljucnePredmete(request):
 #Testni predmeti
 
 def dodajPredmete(request):
+    #Dodavanje razreda kako bi se mogli povezati predmeti koji pripadaju odredenom razredu radi lakseg izvlacenja querija
+
+        razred6=Razred(naziv_razreda="Sesti razred",broj_razreda=6)
+        razred6.save()
+        razred7=Razred(naziv_razreda="Sedmi razred",broj_razreda=7)
+        razred7.save()
+        razred8=Razred(naziv_razreda="Osmi razred",broj_razreda=8)
+        razred8.save()
+        razred9=Razred(naziv_razreda="Deveti razred",broj_razreda=9)
+        razred9.save()
+
+
         predmet1=Predmet(naziv_predmeta="Matematika")
         predmet1.save()
         predmet2=Predmet(naziv_predmeta="Fizika")
         predmet2.save()
         predmet3=Predmet(naziv_predmeta="Informatika")
         predmet3.save()
-        Predmet4=Predmet(naziv_predmeta="Tehnicka kultura")
+        predmet4=Predmet(naziv_predmeta="Tehnicka kultura")
         predmet4.save()
         predmet5=Predmet(naziv_predmeta="Geografija")
         predmet5.save()
         predmet6=Predmet(naziv_predmeta="Tjelesni i zdravstveni odgoj")
         predmet6.save()
 
+        #Dodavanje predmeta za odredeni razred
+        razred6.predmet.add(predmet1)
+        razred6.predmet.add(predmet3)
+        razred6.predmet.add(predmet4)
+        razred6.predmet.add(predmet5)
+        razred6.predmet.add(predmet6)
+
+        razred7.predmet.add(predmet1)
+        razred7.predmet.add(predmet3)
+        razred7.predmet.add(predmet4)
+        razred7.predmet.add(predmet5)
+        razred7.predmet.add(predmet6)
+
+        razred8.predmet.add(predmet1)
+        razred8.predmet.add(predmet2)
+        razred8.predmet.add(predmet6)
+
+        razred9.predmet.add(predmet1)
+        razred9.predmet.add(predmet2)
+        razred9.predmet.add(predmet6)
 #Dodane skole za testiranja
 def dodajSkole(request):
         skola1=Skola(ime_skole="Aleksa Santic")
@@ -94,3 +126,7 @@ def dodajSkole(request):
         skola3.save()
         skola4=Skola(ime_skole="Alija Nametak")
         skola4.save()
+
+
+
+    
