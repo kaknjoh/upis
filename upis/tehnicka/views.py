@@ -12,9 +12,12 @@ from .updateUcenik import *
 from .deleteUcenik import *
 from .pdf_statistika import *
 from .pretragaUcenika import *
+from .seeds import *
+
 
 #------------------ INDEX BASE --------------------------#
 def index_base(request):
+   
     context={
     'smjerovi': Smjer.objects.all()
     }
@@ -27,7 +30,14 @@ def index_viev_predmet(request):
         }
     return render(request,'tehnicka/dodajUcenika.html',context)
 
+#----------------- POPUNJAVANJE BAZE PODACIMA ZA TEST --------------------------#
 
+def popuniBazu(request):
+    dodajSmjerove(request)
+    dodajKljucnePredmete(request)
+    dodajPredmete(request)
+    dodajSkole(request)
+    return HttpResponse("Baza popunjena")
 # Create your views here.
 def index(request,smjer_id):
     message=''
@@ -47,7 +57,7 @@ def dodajucenika(request):
                    # }
                 #return render(request,'tehnicka/dodajUcenika.html',context)
                 saveStudent(request)
-                response=redirect('/admin/')
+                response=redirect('/tscze/')
                 return response
             except KeyError:
                
