@@ -7,9 +7,9 @@ from django.db.models import Q
 
 
 def pretragaUcenika(request,smjer_id):
-    pretraga=request.POST['search']
-    smjer=Smjer.objects.get(id=smjer_id)
-    ucenici_iz_pretrage=Ucenik.objects.filter(Q(smjer=smjer,ime__contains=pretraga) | Q(smjer=smjer,prezime__contains=pretraga))
+    pretraga=request.POST['search']#Podaci uneseni u inputu
+    smjer=Smjer.objects.get(id=smjer_id)#Pretraga se vrsi po smjeru 
+    ucenici_iz_pretrage=Ucenik.objects.filter(Q(smjer=smjer,ime__contains=pretraga) | Q(smjer=smjer,prezime__contains=pretraga)) #Q se koristi za postavljenje OR logickog uslova
     ucenici_po_bodovima=ucenici_iz_pretrage.order_by('-ukupno_bodova')
 
     posebni_bodovi={}

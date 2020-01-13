@@ -203,7 +203,7 @@ def pdf_racunajStatistiku(request, smjer_id):
     'priznanje_opcinsko':priznanje_opcinsko_dict,
     'priznanje_kantonalo': priznanje_kantonalno_dict,
     'priznanje_federalno': priznanje_federalno_dict,
-    'priznanja_ukupno':priznanje_ukupno_dict,
+    #'priznanja_ukupno':priznanje_ukupno_dict,
     'ukupno':ukupno_dict,
 
     'request':request
