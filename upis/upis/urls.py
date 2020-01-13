@@ -19,9 +19,11 @@ Including another URLconf
 # Uncomment next two lines to enable admin:
 from django.contrib import admin
 from django.urls import path,include
+from users import views
 
 urlpatterns = [
-    
+    path("", views.index,name="index"),
     path('admin/', admin.site.urls),
-    path('tscze/',include("tehnicka.urls"))
+    path('tscze/',include("tehnicka.urls")),
+    path("login/", include("users.urls"))
 ]

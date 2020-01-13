@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tehnicka.apps.tehnickaConfig'
+    'tehnicka.apps.tehnickaConfig',
+    'users.apps.usersConfig'
 ]
 
 # Middleware framework

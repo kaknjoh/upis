@@ -12,7 +12,7 @@ urlpatterns = [
     path("details/<int:ucenik_id>", views.details, name='details'),
     path("delete/<int:ucenik_id>", views.delete, name='delete'),
     path("pretrazivanje/<int:smjer_id>", views.pretraga, name='pretragaucenika'),
-   # path("pdf/example/",views.print_pdf,name='pdf'),
+    path("popuni/",views.popuniBazu,name="popunibazu"),
     path("pdf/<int:smjer_id>",views.get_pdf,name='get_pdf'),
    
 ]
